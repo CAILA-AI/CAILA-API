@@ -102,8 +102,82 @@ curl -X POST 'https://caila.api.iotex.ai/:agentId/message' \
   -d '{"userName": "your_name", "userId": "your_id", "text": "Hello Caila!"}'
 ```
 
+
 ### Handle Streaming Response
-Listen for SSE events or parse streaming JSON data
+
+The CAILA API supports streaming responses, enabling real-time reception of AI-generated content. This approach is particularly suitable for chat applications that require immediate feedback and interactive user experiences.
+
+---
+
+#### Message Stream Endpoint  
+**Endpoint:** `POST /:agentId/message-stream`
+
+---
+
+#### Request Example:
+
+```bash
+curl --location 'https://caila.api.iotex.ai/:agentId/message-stream' \
+--header 'Content-Type: application/json' \
+--data '{
+  "userName": "Alice",
+  "name": "Curious Alice",
+  "userId": "someId",
+  "roomId": "someId",
+  "text": "Hi Caila, how is the weather in NY"
+}'
+```
+
+---
+
+#### Request Parameters
+
+- **userName**: User identifier (e.g., Twitter handle)  
+- **name**: Display name (optional)  
+- **userId**: Client-specific user identifier  
+- **roomId**: Room or chat session identifier  
+- **text**: User input message content  
+
+---
+
+### Streaming Response Format
+
+The streaming response uses a specialized format where each line represents different types of data:
+
+---
+
+#### 1. Message ID (`f:`): Identifies the unique message ID for this conversation
+
+```json
+f:{"messageId":"msg-mmU0QEeoBixwsaKMNLs7WL6c"}
+```
+
+---
+
+#### 2. Content Stream (`0:`): AI-generated text content delivered in chunks
+
+```json
+0:"Hey there! *adjusts virtual weather "
+0:"vane*  📡 \n\n"
+0:"I'm Caila, your friendly "
+0:"neighborhood crypto–meteorologist and market "
+```
+
+---
+
+#### 3. End Event (`e:`): Contains completion reason and usage statistics
+
+```json
+e:{"finishReason":"stop","usage":{"promptTokens":2808,"completionTokens":119},"isContinued":false}
+```
+
+---
+
+#### 4. Done Data (`d:`): Final statistics and completion information
+
+```json
+d:{"finishReason":"stop","usage":{"promptTokens":2808,"completionTokens":119}}
+```
 
 ---
 
