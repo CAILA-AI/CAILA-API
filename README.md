@@ -148,15 +148,15 @@ The streaming response uses a specialized format where each line represents diff
 
 #### 1. Message ID (`f:`): Identifies the unique message ID for this conversation
 
-```json
-f:{"messageId":"msg-mmU0QEeoBixwsaKMNLs7WL6c"}
+```css
+f:{"messageId":"msg-mmUOQEeoBixwsaKMNLs7Wl6c"}
 ```
 
 ---
 
 #### 2. Content Stream (`0:`): AI-generated text content delivered in chunks
 
-```json
+```swift
 0:"Hey there! *adjusts virtual weather "
 0:"vane*  📡 \n\n"
 0:"I'm Caila, your friendly "
@@ -167,7 +167,7 @@ f:{"messageId":"msg-mmU0QEeoBixwsaKMNLs7WL6c"}
 
 #### 3. End Event (`e:`): Contains completion reason and usage statistics
 
-```json
+```VB.Net
 e:{"finishReason":"stop","usage":{"promptTokens":2808,"completionTokens":119},"isContinued":false}
 ```
 
@@ -175,7 +175,7 @@ e:{"finishReason":"stop","usage":{"promptTokens":2808,"completionTokens":119},"i
 
 #### 4. Done Data (`d:`): Final statistics and completion information
 
-```json
+```css
 d:{"finishReason":"stop","usage":{"promptTokens":2808,"completionTokens":119}}
 ```
 
